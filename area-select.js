@@ -12,7 +12,7 @@ function _getQueryVariable(variable) {
     return null;
 }
 
-$("image").src = _getQueryVariable("filename");
+$("image").src = _getQueryVariable("tmpfile");
 if (window.devicePixelRatio > 1) {
     $("image").addEventListener("load", function(event) {
         var img = $("image");

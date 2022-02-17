@@ -8,9 +8,9 @@ function areaCapture() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         var tab = tabs[0];
         var filename = getFilename(tab.url);
-        CaptureAPI.visibleCaptureToFile(tab, filename, function(filename) {
+        CaptureAPI.visibleCaptureToFile(tab, filename, function(filename2) {
             chrome.tabs.create({
-                url: chrome.extension.getURL("area-select.html?filename=" + filename),
+                url: chrome.extension.getURL("area-select.html?filename=" + filename + "&tmpfile=" + filename2),
                 active: true,
                 windowId: null,
                 openerTabId: tab.id,

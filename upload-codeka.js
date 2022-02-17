@@ -1,6 +1,6 @@
 
 
-var BASE_URL = "https://www.codeka.com/";
+var BASE_URL = "https://codeka.com/";
 
 var loaderHtml = "<div style=\"position: absolute; top: 33%; text-align: center; line-height: 40px;\">" +
     "Uploading..." +
@@ -16,24 +16,10 @@ function uploadImage(blob, filename, progress, complete) {
   });
   xhr.addEventListener("load", function() {
     var data = JSON.parse(this.responseText);
-    var url = data.upload_url;
-    xhr = new XMLHttpRequest();
-    xhr.upload.addEventListener("progress", function(event) {
-      if (event.lengthComputable) {
-        var percentComplete = event.loaded / event.total;
-        progress(0.25 + (percentComplete * 0.75 * 100));
-      }
-    });
-    xhr.addEventListener("load", function() {
-      data = JSON.parse(this.responseText);
-      complete(BASE_URL + "snip/create?blob_key=" + data.blob_key);
-    });
-    xhr.open("POST", url);
-
-    var form = new FormData();
-    form.append("file", blob, filename);
-    xhr.send(form);
+    complete(BASE_URL + "snip/" + data.slug);
   });
-  xhr.open("GET", BASE_URL + "blob/upload-url");
-  xhr.send();
+  xhr.open("POST", BASE_URL + "snip/upload?redirect=0");
+  var form = new FormData();
+  form.append("file", blob, filename);
+  xhr.send(form);
 }
