@@ -1,9 +1,9 @@
 {
   "name": "Screen Capture",
-  "version": "2.1.3",
-  "manifest_version": 2,
+  "version": "3.0.0",
+  "manifest_version": 3,
   "description": "Screen capture parts of your page, or the whole page in it's entirety, reliably!",
-  "browser_action": {
+  "action": {
     "default_icon": "icon.png",
     "default_popup": "menu.html"
   },
@@ -14,7 +14,14 @@
       }
     }
   },
-  "permissions": [ "activeTab" ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",

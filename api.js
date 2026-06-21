@@ -252,10 +252,13 @@ window.CaptureAPI = (function() {
             }
         });
 
-        chrome.tabs.executeScript(tab.id, {file: 'page.js'}, function() {
+        chrome.scripting.executeScript({
+            target: {tabId: tab.id},
+            files: ['page.js']
+        }).then(() => {
             if (timedOut) {
                 console.error('Timed out too early while waiting for ' +
-                              'chrome.tabs.executeScript. Try increasing the timeout.');
+                            'scripting.executeScript. Try increasing the timeout.');
             } else {
                 loaded = true;
                 progress(0);
