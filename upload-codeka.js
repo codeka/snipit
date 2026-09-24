@@ -1,6 +1,6 @@
 
 
-var BASE_URL = "https://codeka.com/";
+var BASE_URL = "https://snipit.codeka.com/";
 
 var loaderHtml = "<div style=\"position: absolute; top: 33%; text-align: center; line-height: 40px;\">" +
     "Uploading..." +
@@ -16,9 +16,9 @@ function uploadImage(blob, filename, progress, complete) {
   });
   xhr.addEventListener("load", function() {
     var data = JSON.parse(this.responseText);
-    complete(BASE_URL + "snip/" + data.slug);
+    complete(BASE_URL + data.slug);
   });
-  xhr.open("POST", BASE_URL + "snip/upload?redirect=0");
+  xhr.open("POST", BASE_URL + "upload");
   var form = new FormData();
   form.append("file", blob, filename);
   xhr.send(form);
